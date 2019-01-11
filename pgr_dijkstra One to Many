@@ -3,3 +3,12 @@ SELECT * FROM pgr_dijkstra(
     2, ARRAY[3,5],
     FALSE
 );
+
+----------------------------------------------------------
+SELECT seq, id1 AS node, id2 AS edge, the_geom
+FROM pgr_dijkstra(
+    'SELECT gid as id, source, target, cost, reverse_cost FROM public.ways',
+    14117, 523, false, false
+) as di
+  JOIN public.ways pt
+  ON di.id2 = pt.gid;
