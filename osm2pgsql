@@ -1,0 +1,1 @@
+osm2pgsql -c -d osm -U postgres -H localhost -S C:\osm2pgsql\default.style C:\Users\ASUS\Desktop\map.osm
