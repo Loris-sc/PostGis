@@ -1,0 +1,5 @@
+SELECT * FROM pgr_dijkstra(
+    'SELECT id, source, target, st_length(geom) as cost FROM public.vienna',
+    2, ARRAY[3,5],
+    FALSE
+);
