@@ -1,0 +1,1 @@
+osm2pgrouting --file C:\Users\ASUS\Desktop\benin.osm --conf C:\osm2pgrouting\mapconfig.xml --dbname osm --user postgres --password '1q2w3e4r'
