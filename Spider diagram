@@ -1,0 +1,47 @@
+DROP TABLE IF EXISTS flowX;
+CREATE TABLE flowX AS
+(
+SELECT * FROM 
+(SELECT edge, count(edge) as count FROM  ( SELECT seq, id1 AS path, id2 AS edge, cost FROM pgr_kdijkstraPath(
+    'SELECT gid as id, source, target, to_cost as cost, FROM routing_data.ways WHERE length >= 0', 
+    849828, array[499642,501459,502468,502469,502563,502677,504145,504264,505161,509436,511830,512310,512740,513404,513803,513914,514414,514426,515608,516285,519373,519375,519623], false, false
+)) as temp_route
+ GROUP BY edge) as flowtab, routing_data.ways 
+WHERE edge = target 
+) 
+----------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE spider AS
+(
+SELECT * FROM 
+(SELECT edge, count(edge) as count FROM  ( SELECT seq, id1 AS path, id2 AS edge, cost FROM pgr_kdijkstraPath(
+    'SELECT gid as id, source, target, cost FROM public.ways WHERE length >= 0', 
+    523, array[1378,14117,10212,505], false, false
+)) as temp_route
+ GROUP BY edge) as flowtab, public.ways 
+WHERE edge = target 
+) 
+--------------------------
+SELECT * FROM pgr_dijkstra(
+    'SELECT gid as id, source, target, cost, reverse_cost FROM public.ways',
+    ARRAY[1378,14117], 523
+);
+
+---------------------------------------------
+CREATE table route as (
+SELECT * FROM pgr_dijkstra(
+    'SELECT gid as id, source, target, cost, reverse_cost FROM public.ways',
+    ARRAY[1378,14117], 523
+)as table1 JOIN public.ways
+	ON edge = gid
+ WHERE cost is not null);
+
+-------------------------------------------------
+CREATE table driving as (
+SELECT * FROM 
+	pgr_dijkstra(
+    'SELECT gid as id, source, target, cost, reverse_cost FROM public.ways',
+    22031, 50140
+)as table1 JOIN public.rete
+	ON edge1 = gid
+ WHERE cost is not null);
