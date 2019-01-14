@@ -21,27 +21,3 @@ SELECT * FROM
  GROUP BY edge) as flowtab, public.ways 
 WHERE edge = target 
 ) 
---------------------------
-SELECT * FROM pgr_dijkstra(
-    'SELECT gid as id, source, target, cost, reverse_cost FROM public.ways',
-    ARRAY[1378,14117], 523
-);
-
----------------------------------------------
-CREATE table route as (
-SELECT * FROM pgr_dijkstra(
-    'SELECT gid as id, source, target, cost, reverse_cost FROM public.ways',
-    ARRAY[1378,14117], 523
-)as table1 JOIN public.ways
-	ON edge = gid
- WHERE cost is not null);
-
--------------------------------------------------
-CREATE table driving as (
-SELECT * FROM 
-	pgr_dijkstra(
-    'SELECT gid as id, source, target, cost, reverse_cost FROM public.ways',
-    22031, 50140
-)as table1 JOIN public.rete
-	ON edge1 = gid
- WHERE cost is not null);
