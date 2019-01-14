@@ -1,7 +1,7 @@
 SELECT gid, source, target, the_geom
 	FROM pgr_dijkstra(
     'SELECT gid as id, source, target, cost, reverse_cost FROM public.ways',
-    ARRAY[1378,14117], 523
+    ARRAY[1378,14117], 6816
 ) JOIN public.ways
 	ON edge = gid;
 
