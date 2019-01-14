@@ -1,12 +1,6 @@
-SELECT seq, id1 AS node, id2 AS edge, cost, geom
-  FROM pgr_dijkstra(
-    'SELECT id, source, target, st_length(geom) as cost FROM public.vienna',
-    150, 1, false, false
-  ) as di
-  JOIN public.vienna pt
-  ON di.id2 = pt.id ;
---------------------------------------------------------------------------------------------
-SELECT * FROM pgr_dijkstra(
+SELECT gid, source, target, the_geom
+	FROM pgr_dijkstra(
     'SELECT gid as id, source, target, cost, reverse_cost FROM public.ways',
-    2, 3
-);
+    1378, 523
+) JOIN public.ways
+	ON edge = gid;
