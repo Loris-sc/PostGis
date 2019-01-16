@@ -5,3 +5,5 @@ ALTER TABLE public.streets ADD COLUMN length FLOAT8;
 
 
 SELECT pgr_createTopology('streets',0.000001,'geom','id'); 
+
+UPDATE streets SET length = ST_Length(geom::geography);
