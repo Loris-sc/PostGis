@@ -1,1 +1,3 @@
-osm2pgrouting --file C:\Users\Loris\Documents\MIC\MIC_Reggio15\GIS\Data\ReggioEmilia --conf C:\Users\Loris\Documents\PgRouting\mapconfig.xml --dbname osm --user postgres --password '1q2w3e4r'
+osm2pgrouting --file C:\Users\Loris\Desktop\bsas.osm --conf C:\Programmi\PostgreSQL\15\bin\mapconfig.xml --dbname postgres --user postgres --password '1355'
+
+Programmi\PostgreSQL\15\bin
