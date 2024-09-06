@@ -1,0 +1,5 @@
+SELECT Origin, Destination, Flux,
+make_line(a.geometry, b.geometry) 
+FROM Cassano_Origine_02
+JOIN CentroidiComuni a ON Cassano_Origine_02.Origin = a.ISTAT
+JOIN CentroidiComuni b ON Cassano_Origine_02.Destination = b.ISTAT
